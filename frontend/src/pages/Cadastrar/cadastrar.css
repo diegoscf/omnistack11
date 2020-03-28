@@ -1,0 +1,54 @@
+.cadastrar-container {
+    width: 100%;
+    max-width: 1120px;
+    height: 100vh;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cadastrar-container .conteudo {
+    width: 100%;
+    padding: 96px;
+    background: #f0f0f5;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cadastrar-container .conteudo section {
+    width: 100%;
+    max-width: 380px;
+}
+
+.cadastrar-container .conteudo section h1 {
+    margin: 64px 0 32px;
+    font-size: 32px;
+}
+
+.cadastrar-container .conteudo section p {
+    font-size: 18px;
+    color: #737380;
+    line-height: 32px;
+}
+
+.cadastrar-container .conteudo form {
+    width: 100%;
+    max-width: 450px;
+}
+
+.cadastrar-container .conteudo form input {
+    margin-top: 8px;
+}
+
+.cadastrar-container .conteudo form .inputs-agrupados {
+    display: flex;
+}
+
+.cadastrar-container .conteudo form .inputs-agrupados input + input {
+    margin-left: 8px;
+}
