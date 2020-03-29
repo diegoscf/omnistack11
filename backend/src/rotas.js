@@ -1,5 +1,6 @@
 const express = require('express');
-const crypto  = require('crypto');
+const {celebrate, Segments, Joi} = require('celebrate');
+// const crypto  = require('crypto');
 // const conexao = require('./database/conexao');
 const OngController       = require('./controllers/OngController');
 const IncidenteController = require('./controllers/IncidenteController');
@@ -50,13 +51,49 @@ rotas.get('/ongs', OngController.listar);
 //     return resposta.json({id});
 // });
 
-rotas.post('/ongs', OngController.incluir);
+rotas.post(
+    '/ongs', 
+    celebrate({
+        [Segments.BODY]: Joi.object().keys({
+            nome: Joi.string().required(),
+            email: Joi.string().required().email(),
+            whatsapp: Joi.string().required().min(10).max(11),
+            cidade: Joi.string().required(),
+            uf: Joi.string().required().length(2)
+        })
+    }), 
+    OngController.incluir
+);
 
-rotas.get('/ong', PerfilController.listar);
+rotas.get(
+    '/ong', 
+    celebrate({
+        [Segments.HEADERS]: Joi.object({
+            authorization: Joi.string().required()
+        }).unknown()
+    }),
+    PerfilController.listar
+);
 
-rotas.get('/incidentes', IncidenteController.listar);
+rotas.get(
+    '/incidentes', 
+    celebrate({
+        [Segments.QUERY]: Joi.object({
+            page: Joi.number()
+        }).unknown()
+    }),
+    IncidenteController.listar
+);
 rotas.post('/incidentes', IncidenteController.incluir);
-rotas.delete('/incidentes/:id', IncidenteController.excluir);
+rotas.delete(
+    '/incidentes/:id', 
+    celebrate({
+        [Segments.PARAMS]: Joi.object({
+            id: Joi.number().required()
+        }).unknown()
+    }),
+    IncidenteController.excluir
+);
 
 rotas.post('/sessao', SessaoController.criar);
 

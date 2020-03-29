@@ -1,5 +1,6 @@
 const conexao = require('../database/conexao');
-const crypto  = require('crypto');
+// const crypto  = require('crypto');
+const gerarId = require('../utils/gerarId');
 
 module.exports = {
     
@@ -11,7 +12,8 @@ module.exports = {
     async incluir (requisicao, resposta) {
         const {nome, email, whatsapp, cidade, uf} = requisicao.body;
     
-        const id = crypto.randomBytes(4).toString('HEX');
+        // const id = crypto.randomBytes(4).toString('HEX');
+        const id = gerarId();
     
         await conexao('tb_ong').insert({
             id, 
